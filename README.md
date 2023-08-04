@@ -31,7 +31,7 @@ translator.translate_one(original: "Hello Kitty!", locale_code: "en-US)
 Translate multiple:
 
 ```
-translator.translate_one(originals: [ "Hello Kitty!", "Hello Dolly!" ], locale_code: "en-US)
+translator.translate_many(originals: [ "Hello Kitty!", "Hello Dolly!" ], locale_code: "en-US)
 ```
 
 ## Best practice
@@ -67,8 +67,8 @@ end
 ```
 
 ## Notes
-The client will always return multiple translations with different locales under the same locale code, eg:
-* for an english request it may return variants for en-us, en-ca, en-au
+The client may return multiple translations with different locales under the same locale code. 
+This means that for any English request (en-us, en-GB, en_AU, en) it may return variants for en-us, en-ca, en-au. Typically you can use any of them but at some point someone will start to nitpick (eg "localise", "localiSe"! Not "localize"! Her Majesty's English! You're not a wild animal!).
 
 If no translation was found it will return the original text, in this case you may try again later as the service will translate your string in the background. 
 Typically this means on a product's first occurence all descriptions will be in English, but subsequent product updates will be translated automatically.
@@ -76,4 +76,5 @@ Typically this means on a product's first occurence all descriptions will be in 
 
 # TODO
 
+* when returning multiple translations make sure the locale code is included with each entry
 * automated publish to Rubygems: do they make sense?
